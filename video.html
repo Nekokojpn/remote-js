@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>A-Frame?AR.js - ???????????</title>
+    <!-- ? A-Frame ????? -->
+    <script src="//aframe.io/releases/0.8.0/aframe.min.js"></script>
+    <!-- ? AR.js ????? -->
+    <script src="//jeromeetienne.github.io/AR.js/aframe/build/aframe-ar.js"></script>
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .ui {
+            position: absolute;
+            z-index: 100;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            margin: 0;
+            padding: 10px 15px 30px;
+            text-align: center;
+            box-sizing: border-box;
+        }
+        .ui a {
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            background-color: #ffffff;
+            line-height: 100%;
+            color: #303030;
+            margin: 10px 3px;
+            border-radius: 50%;
+            position: relative;
+
+        }
+        .ui a i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .ui a:active {
+            color: #ff0000;
+        }
+
+        #snap {
+            max-width: 100%;
+            height: auto;
+            display: block;;
+            visibility: hidden;
+        }
+        .ui a.disabled {
+            pointer-events: none;
+            color: #cccccc;
+        }
+        #snap.visible {
+            visibility: visible;
+        }
+    </style>
+
+</head>
+
+<body style='margin: 0; overflow: hidden;'>
+<div id="dist">
+
+</div>
+<!-- ? ?????? -->
+<a-scene id="aiueo" embedded arjs='debugUIEnabled:false;trackingMethod: best;' vr-mode-ui="enabled: false">
+    <a-marker preset='hiro'>
+        <a-box position="0 0.5 0" wireframe="true"></a-box>
+    </a-marker>
+
+    <!-- ? ?????? -->
+    <a-entity camera></a-entity>
+</a-scene>
+<div class="ui">
+    <img id="snap">
+    <a href="#" id="delete-photo" title="Delete Photo" class="disabled"><i class="material-icons">delete</i></a>
+    <button onclick="startRecording()">start</button></a>
+    <button onclick="endRecording()">end</button>
+
+</div>
+<video id="video" style="position: absolute; top: 0px;" autoplay playsInline muted></video>
+<canvas id="aacanvas" style="position: absolute; bottom: 0px; background-color: #121212;"></canvas>
+<img id="imgimg" src="assets/img/brand/blue.png">
+</body>
+
+<script>
+let blobs = [];
+let stream;
+let mediaRecorder;
+var video = document.getElementById("arjs-video");
+setTimeout(() => {console.log("OK"); video = document.getElementById("arjs-video")}, 2500);
+
+let prev = document.getElementById("video");
+
+//let canv = document.getElementById("aacanvas");
+let canv = document.createElement("canvas");
+
+function startRecording()
+{
+    // let windowWidth = window.innerWidth;
+    // let windowHeight = window.innerHeight;
+    //let arjs = document.querySelector("#aiueo .a-canvas");
+    let arjs = document.querySelector("a-scene").components.screenshot.getCanvas("perspective");
+    let ctx = canv.getContext("2d");
+    
+    // canv.width = windowWidth * window.devicePixelRatio;
+    // canv.height = windowHeight * window.devicePixelRatio;
+    canv.width = arjs.width;
+    canv.height = arjs.height;
+    //ctx.drawImage(video, 0, 0, video.width, video.height, 0, 0, canv.width, canv.height);
+    ctx.drawImage(video, 0, 0, video.width, video.height);
+    //ctx.drawImage(arjs, 0, 0, video.width, video.height, 0, 0, video.width, video.height);
+    //ctx.drawImage(document.getElementById("imgimg"), 0, 0, arjs.width, arjs.height, 0, 0, arjs.width, arjs.height);
+    ctx.drawImage(arjs, 0, 0, arjs.width, arjs.height, 0, 0, video.width, video.height);
+
+    setInterval(() => {
+        console.log("update");
+        //ctx.drawImage(video, 0, 0, video.width, video.height, 0, 0, canv.width, canv.height);
+
+        //ctx.drawImage(arjs, 0, 0, arjs.width, arjs.height, 0, 0, canv.width, canv.height);
+        //ctx.drawImage(video, 0, 0, video.width, video.height, 0, 0, canv.width, canv.height);
+        //ctx.drawImage(arjs, 0, 0, arjs.width, arjs.height, 0, 0, arjs.width, arjs.height);
+    }, 10000/30);
+
+	stream = canv.captureStream(30);
+    //stream = arjs.captureStream(30);
+    mediaRecorder = new MediaRecorder(stream);
+    mediaRecorder.ondataavailable = (event) => {
+       // Let's append blobs for now, we could also upload them to the network.
+       if (event.data)
+            blobs.push(event.data);
+    }
+
+    mediaRecorder.onstop = doPreview;
+    // Let's receive 1 second blobs
+    mediaRecorder.start(1000);
+// }
+}
+function endRecording()
+{
+    // document.getElementById("dist").appendChild(canv);
+    canv.style="width:50%; height:50%;"
+    // Let's stop capture and recording
+    mediaRecorder.stop();
+    stream.getTracks().forEach(track => track.stop());
+}
+function doPreview()
+{
+    if (!blobs.length)
+        return;
+    // Let's concatenate blobs to preview the recorded content
+    prev.src = URL.createObjectURL(new Blob(blobs, { type: mediaRecorder.mimeType }));
+}
+</script>
+
+</html>

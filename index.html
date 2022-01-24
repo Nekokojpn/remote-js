@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>BanRemote</title>
+  <!-- Favicon -->
+  <link rel="icon" href="assets/img/brand/fabikon.png" type="image/png">
+  <!-- Fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
+  <!-- Icons -->
+  <link rel="stylesheet" href="assets/vendor/nucleo/css/nucleo.css" type="text/css">
+  <link rel="stylesheet" href="assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" type="text/css">
+  <!-- Page plugins -->
+  <!-- Argon CSS -->
+  <link rel="stylesheet" href="assets/css/argon.css?v=1.2.0" type="text/css">
+  <link rel="stylesheet" href="assets/css/banremote.css" type="text/css">
+  <script src="https://kit.fontawesome.com/883578ac73.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <!-- Main content -->
+  <div class="main-content" id="panel">
+    <!-- Header -->
+    <!-- Header -->
+    <!-- Page content -->
+    <div class="container"></div>
+      <div class="main-screen">
+        <video class="peervideosize" id="js-local-stream">
+        </video>
+        <canvas id="peercanvas"class="canvas" width="460" height="460"></canvas>
+          <img id="peerimg"/>
+        <p class="text-white font-weight-bold va-top ca-Offline" id="cameraOffline" style="display: none;">サイトにアクセスできません。ネットワークが切断されている可能性があります。</span>
+          
+          <div class="remote-streams" id="js-remote-streams">
+          <!-- キャンバス作成↓　ビデオクリック処理↑ -->
+          
+          <!-- キャンバス作成↓　ビデオクリック処理↑ -->
+        </div>
+        <div>
+          <div>
+          <a onclick="toggleVideo()" id="video-icon" class="fas fa-video  text-green dashed-line fa-fw"></a>
+          <a onclick="toggleMic()" id="mic-icon" class="fas fa-microphone  text-green dashed-line fa-fw" ></a>
+          <a id="peervideooff" class="fas fa-glasses text-green dashed-line fa-fw"></a>
+            
+          
+            <!-- <button class="btn btn-outline-success va-top" id="peervideooff">相手のカメラを　OFF</button>
+          <button class="btn btn-outline-success va-top" id="peer_image_qu">相手のカメラを　画質優先モード</button>
+          <button class="btn btn-outline-success va-top" id="peer_fps_qu">相手のカメラを　フレームレート優先モード</button>-->
+          
+          
+          </div>
+        </div>
+        
+
+      </div>
+        <div>
+          <pre class="messages display-none" id="js-messages"></pre>
+          <input class="messages" type="text" id="js-local-text">
+          <button class="messages" id="js-send-trigger">Send</button>
+        </div>
+        <span id="js-room-mode"></span>
+          <button id="js-leave-trigger">Leave</button>
+      </div>
+      <p class="meta" id="js-meta"></p>
+    </div>
+  </div>
+  <div id="loader" class="">
+    <div class="spinner">
+      <div class="spinner-border text-light" id="uploading-spinner" role="status"><span class="sr-only">Loading</span></div>
+    </div>
+    <div class="spinner-msg">
+      <h5 class="h3 font-bold text-light">接続中...</h5>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/vendor/js-cookie/js.cookie.js"></script>
+  <script src="assets/vendor/jquery.scrollbar/jquery.scrollbar.min.js"></script>
+  <script src="assets/vendor/jquery-scroll-lock/dist/jquery-scrollLock.min.js"></script>
+  <!-- Optional JS -->
+  <script src="assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="assets/js/argon.js?v=1.2.0"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+  <script src="//cdn.webrtc.ecl.ntt.com/skyway-4.4.1.js"></script>
+  <script src="/_shared/key.js"></script>
+  <script src="/script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,180 @@
+body {
+  background-color: #121212;
+}
+
+.nav-height {
+  height: 50px;
+}
+
+.main-screen {
+  width: 100%;
+  height: 100vh;
+  z-index: 100;
+  position: absolute;
+  z-index: 9999;
+  background-color: #121212;
+  text-align: center;
+}
+
+.loaded {
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+}
+
+#loader {
+  top: 0%;
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: 9999;
+  background-color: #121212;
+}
+
+#loader.loaded {
+  visibility: hidden;
+  opacity: 0;
+  z-index: -1;
+}
+
+.spinner-border {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  animation: spinner-border .75s linear infinite;
+  vertical-align: text-bottom;
+  border: .25em solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+}
+
+@keyframes spinner-border
+{
+    to
+    {
+        transform: rotate(360deg);
+    }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.spinner {
+  width: 100%;
+  top: 50%;
+  transform: translate(0, -50%);
+  position: absolute;
+  text-align: center;
+  font-size: 10px;
+}
+.spinner-msg {
+  width: 100%;
+  top: 55%;
+  transform: translate(0, -50%);
+  position: absolute;
+  text-align: center;
+  font-size: 10px;
+}
+.peervideosize {
+  
+  text-align: center;
+  height: 10; 
+  width: 10%;
+  
+}
+
+.remote-streams {
+  text-align: center;
+  height: 80%; 
+  
+}
+
+.ca-Offline {
+  right:0%;
+  top: 5%;
+  display: flex;
+  position: absolute;
+}
+
+.remote-streams video {
+  height: 100%;
+  width: auto;
+  text-align: center;
+  z-index: 100;
+
+}
+
+.room video{
+  float: left;
+  
+}
+
+pre {
+  clear: both;
+  color: rgb(255, 255, 255);
+}
+
+
+.messages {
+  visibility:hidden;
+}
+
+.display-none {
+  display: none;
+}
+
+.icon-control {
+  margin-left: 5px;
+  width: 32px;
+  height: 32px;
+}
+/* 
+.icon-control:hover{
+  opacity: 0.5;
+} */
+
+
+.dashed-line :hover {
+  opacity: 0.7;
+  
+}
+
+.dashed-line {
+  width: 64px !important;
+  height: 16px !important;
+  font-size: 1.8em;
+  cursor : pointer;
+}
+.va-top {
+  vertical-align: top !important;
+}
+
+.ofBarNotice {
+  background: #333;
+  text-align: left;
+  z-index: 999999999;
+  font-size: 16px;
+  color: #fff;
+  padding: 18px 5%;
+  font-weight: 400;
+  display: block;
+  position: relative;
+  top: 0px;
+  box-shadow: 0 6px 13px -4px rgb(0 0 0 / 25%);
+}
+
+.canvas {
+  display: none;
+}
+
+.container::-webkit-scrollbar {
+  display:none;
+}
+
+.myColorGreen {
+  color: aqua;
+}
+.myColorGray {
+  color: darkgray;
+}
